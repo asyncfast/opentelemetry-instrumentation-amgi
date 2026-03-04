@@ -774,7 +774,7 @@ wheels = [
 
 [[package]]
 name = "opentelemetry-instrumentation-amgi"
-version = "0.0.0"
+version = "0.60b1"
 source = { virtual = "." }
 dependencies = [
     { name = "mdformat" },
@@ -805,7 +805,7 @@ dev = [
 
 [[package]]
 name = "opentelemetry-instrumentation-amgi-sqs-event-source-mapping"
-version = "0.0.0"
+version = "0.60b1"
 source = { editable = "packages/opentelemetry-instrumentation-amgi-sqs-event-source-mapping" }
 dependencies = [
     { name = "amgi-sqs-event-source-mapping" },
@@ -845,7 +845,7 @@ dev = [
 
 [[package]]
 name = "opentelemetry-instrumentation-asyncfast"
-version = "0.0.0"
+version = "0.60b1"
 source = { editable = "packages/opentelemetry-instrumentation-asyncfast" }
 dependencies = [
     { name = "amgi-types" },
