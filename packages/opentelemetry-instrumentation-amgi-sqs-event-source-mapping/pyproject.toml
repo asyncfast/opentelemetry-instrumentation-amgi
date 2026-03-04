@@ -1,0 +1,45 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.9.26,<0.10.0" ]
+
+[project]
+name = "opentelemetry-instrumentation-amgi-sqs-event-source-mapping"
+version = "0.0.0"
+description = "OpenTelemetry instrumentation for AMGI SQS event source mapping"
+readme = "README.md"
+license = "MIT"
+license-files = [
+  "LICENSE",
+]
+authors = [
+  { name = "jack.burridge", email = "jack.burridge@mail.com" },
+]
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "amgi-sqs-event-source-mapping>=0.37.0",
+  "opentelemetry-api~=1.12",
+  "opentelemetry-instrumentation==0.60b1",
+  "opentelemetry-sdk~=1.12",
+]
+optional-dependencies.boto3 = [
+  "boto3>=1.40.70",
+]
+entry-points.opentelemetry_instrumentor.amgi_sqs_event_source_mapping = "opentelemetry.instrumentation.amgi_sqs_event_source_mapping:SqsEventSourceMappingInstrumentor"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4.1",
+  "pytest-asyncio>=1.1",
+  "pytest-cov>=7.0.0",
+]
+
+[tool.uv]
+build-backend.module-name = "opentelemetry.instrumentation.amgi_sqs_event_source_mapping"

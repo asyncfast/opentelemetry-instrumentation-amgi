@@ -50,5 +50,6 @@ strict_bytes = true
 extra_checks = true
 allow_untyped_decorators = true
 mypy_path = [
+  "packages/opentelemetry-instrumentation-amgi-sqs-event-source-mapping/src",
   "packages/opentelemetry-instrumentation-asyncfast/src",
 ]

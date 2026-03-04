@@ -5,7 +5,35 @@ requires-python = ">=3.10"
 [manifest]
 members = [
     "opentelemetry-instrumentation-amgi",
+    "opentelemetry-instrumentation-amgi-sqs-event-source-mapping",
     "opentelemetry-instrumentation-asyncfast",
+]
+
+[[package]]
+name = "amgi-common"
+version = "0.37.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "amgi-types" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2b/e0/f5ae21863cae56d0232cea1988df0e523c9bc65600f14a08a5a7a18ffd5e/amgi_common-0.37.0.tar.gz", hash = "sha256:d86913262565b032449bb9cdef7a346d0c633f2b63090b3b3bcf46605a9481fd", size = 5236, upload-time = "2026-02-25T22:34:26.372Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/20/43/e4a4dce70d51096a9efe7ad8dd889ded408519c57fa3f5c2fae023bd0653/amgi_common-0.37.0-py3-none-any.whl", hash = "sha256:3f12b2855e0551af1b819f33354b80dccab1ad674df277744049f4e3d07fb59b", size = 6282, upload-time = "2026-02-25T22:34:23.392Z" },
+]
+
+[[package]]
+name = "amgi-sqs-event-source-mapping"
+version = "0.37.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "amgi-common" },
+    { name = "amgi-types" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7e/6a/d2ac6f8b44c144e630ba3a7547c982f1d6e944f6c35f6f93caab396dd21b/amgi_sqs_event_source_mapping-0.37.0.tar.gz", hash = "sha256:ddba9cc90ff1aa32d65d29952fac7354161706f519988f5e0fc654652c8070de", size = 5859, upload-time = "2026-02-25T22:34:24.189Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a7/03/d589cfae25b87702dafb28b04e62d48a87ab0a2eba2e8b35a4eae60ff281/amgi_sqs_event_source_mapping-0.37.0-py3-none-any.whl", hash = "sha256:fac38b47be120644707060328ced7a4ecc5301caadc6fac78303f0cc4175fd2f", size = 7243, upload-time = "2026-02-25T22:34:17.027Z" },
 ]
 
 [[package]]
@@ -58,6 +86,34 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/8e/ff/70dca7d7cb1cbc0edb2c6cc0c38b65cba36cccc491eca64cabd5fe7f8670/backports_asyncio_runner-1.2.0.tar.gz", hash = "sha256:a5aa7b2b7d8f8bfcaa2b57313f70792df84e32a2a746f585213373f900b42162", size = 69893, upload-time = "2025-07-02T02:27:15.685Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/59/76ab57e3fe74484f48a53f8e337171b4a2349e506eabe136d7e01d059086/backports_asyncio_runner-1.2.0-py3-none-any.whl", hash = "sha256:0da0a936a8aeb554eccb426dc55af3ba63bcdc69fa1a600b5bb305413a4477b5", size = 12313, upload-time = "2025-07-02T02:27:14.263Z" },
+]
+
+[[package]]
+name = "boto3"
+version = "1.42.60"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "botocore" },
+    { name = "jmespath" },
+    { name = "s3transfer" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b8/e0/071e00265d3d8127b28c27ba3918ba283f49b39943864a389ac3f5096ef3/boto3-1.42.60.tar.gz", hash = "sha256:3d549d15c821dcc871a0821319049e7d493ae3317121eb01e4b1f5230c19d5d4", size = 112786, upload-time = "2026-03-03T21:21:07.199Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ed/30/156ff2b5afb7dd03383b5f97d0e32535e9c0e783917380c476fe2fbc1874/boto3-1.42.60-py3-none-any.whl", hash = "sha256:c0cc3d93cd76c99461f6e109e04bb020defe3ffcd04c6163c72836dff5591614", size = 140554, upload-time = "2026-03-03T21:21:05.194Z" },
+]
+
+[[package]]
+name = "botocore"
+version = "1.42.60"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jmespath" },
+    { name = "python-dateutil" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/82/d7/bfe8413cc7dc167e04ca9c68ea136251307960f662ec5889512615565b25/botocore-1.42.60.tar.gz", hash = "sha256:de9278810fb2e92a9ffe3dc8ffa68f1066e6d2caf19da9460760743b39ca5215", size = 14950855, upload-time = "2026-03-03T21:20:51.529Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8d/63/5cf970a00e9ddcbb9e65ecc79276717a9555a77d3d0571bd962676e19c3b/botocore-1.42.60-py3-none-any.whl", hash = "sha256:d8b4aab06cc134e21d294c068cb94e0eeb59bacd27c836fb6b882b61433df2f4", size = 14621726, upload-time = "2026-03-03T21:20:47.935Z" },
 ]
 
 [[package]]
@@ -412,6 +468,15 @@ wheels = [
 ]
 
 [[package]]
+name = "jmespath"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/59/322338183ecda247fb5d1763a6cbe46eff7222eaeebafd9fa65d4bf5cb11/jmespath-1.1.0.tar.gz", hash = "sha256:472c87d80f36026ae83c6ddd0f1d05d4e510134ed462851fd5f754c8c3cbb88d", size = 27377, upload-time = "2026-01-22T16:35:26.279Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl", hash = "sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64", size = 20419, upload-time = "2026-01-22T16:35:24.919Z" },
+]
+
+[[package]]
 name = "librt"
 version = "0.8.1"
 source = { registry = "https://pypi.org/simple" }
@@ -698,6 +763,46 @@ dev = [
     { name = "pre-commit-uv", specifier = ">=4.2.1" },
     { name = "tox", specifier = ">=4.47.3" },
     { name = "tox-uv", specifier = ">=1.33.1" },
+]
+
+[[package]]
+name = "opentelemetry-instrumentation-amgi-sqs-event-source-mapping"
+version = "0.0.0"
+source = { editable = "packages/opentelemetry-instrumentation-amgi-sqs-event-source-mapping" }
+dependencies = [
+    { name = "amgi-sqs-event-source-mapping" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-instrumentation" },
+    { name = "opentelemetry-sdk" },
+]
+
+[package.optional-dependencies]
+boto3 = [
+    { name = "boto3" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "amgi-sqs-event-source-mapping", specifier = ">=0.37.0" },
+    { name = "boto3", marker = "extra == 'boto3'", specifier = ">=1.40.70" },
+    { name = "opentelemetry-api", specifier = "~=1.12" },
+    { name = "opentelemetry-instrumentation", specifier = "==0.60b1" },
+    { name = "opentelemetry-sdk", specifier = "~=1.12" },
+]
+provides-extras = ["boto3"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=8.4.1" },
+    { name = "pytest-asyncio", specifier = ">=1.1" },
+    { name = "pytest-cov", specifier = ">=7.0.0" },
 ]
 
 [[package]]
@@ -1041,6 +1146,18 @@ wheels = [
 ]
 
 [[package]]
+name = "python-dateutil"
+version = "2.9.0.post0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3", size = 342432, upload-time = "2024-03-01T18:36:20.211Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427", size = 229892, upload-time = "2024-03-01T18:36:18.57Z" },
+]
+
+[[package]]
 name = "python-discovery"
 version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1127,6 +1244,27 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f6/45/eafb0bba0f9988f6a2520f9ca2df2c82ddfa8d67c95d6625452e97b204a5/questionary-2.1.1.tar.gz", hash = "sha256:3d7e980292bb0107abaa79c68dd3eee3c561b83a0f89ae482860b181c8bd412d", size = 25845, upload-time = "2025-08-28T19:00:20.851Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3c/26/1062c7ec1b053db9e499b4d2d5bc231743201b74051c973dadeac80a8f43/questionary-2.1.1-py3-none-any.whl", hash = "sha256:a51af13f345f1cdea62347589fbb6df3b290306ab8930713bfae4d475a7d4a59", size = 36753, upload-time = "2025-08-28T19:00:19.56Z" },
+]
+
+[[package]]
+name = "s3transfer"
+version = "0.16.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "botocore" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/05/04/74127fc843314818edfa81b5540e26dd537353b123a4edc563109d8f17dd/s3transfer-0.16.0.tar.gz", hash = "sha256:8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920", size = 153827, upload-time = "2025-12-01T02:30:59.114Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fc/51/727abb13f44c1fcf6d145979e1535a35794db0f6e450a0cb46aa24732fe2/s3transfer-0.16.0-py3-none-any.whl", hash = "sha256:18e25d66fed509e3868dc1572b3f427ff947dd2c56f844a5bf09481ad3f3b2fe", size = 86830, upload-time = "2025-12-01T02:30:57.729Z" },
+]
+
+[[package]]
+name = "six"
+version = "1.17.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
 ]
 
 [[package]]
@@ -1267,6 +1405,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz", hash = "sha256:ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464", size = 75949, upload-time = "2025-10-01T02:14:41.687Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl", hash = "sha256:4ed1cacbdc298c220f1bd249ed5287caa16f34d44ef4e9c3d0cbad5b521545e7", size = 14611, upload-time = "2025-10-01T02:14:40.154Z" },
+]
+
+[[package]]
+name = "urllib3"
+version = "2.6.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz", hash = "sha256:1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed", size = 435556, upload-time = "2026-01-07T16:24:43.925Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/39/08/aaaad47bc4e9dc8c725e68f9d04865dbcb2052843ff09c97b08904852d84/urllib3-2.6.3-py3-none-any.whl", hash = "sha256:bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4", size = 131584, upload-time = "2026-01-07T16:24:42.685Z" },
 ]
 
 [[package]]
