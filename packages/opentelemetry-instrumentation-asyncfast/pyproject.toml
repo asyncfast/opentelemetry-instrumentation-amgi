@@ -4,7 +4,7 @@ requires = [ "uv-build>=0.9.26,<0.10.0" ]
 
 [project]
 name = "opentelemetry-instrumentation-asyncfast"
-version = "0.0.0"
+version = "0.60b1"
 description = "OpenTelemetry instrumentation for AsyncFast"
 readme = "README.md"
 license = "MIT"

@@ -1,6 +1,6 @@
 [project]
 name = "opentelemetry-instrumentation-amgi"
-version = "0.0.0"
+version = "0.60b1"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
