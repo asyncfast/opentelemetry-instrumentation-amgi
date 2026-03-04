@@ -12,7 +12,9 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
 ]
-dependencies = []
+dependencies = [
+  "mdformat>=1.0.0",
+]
 
 [dependency-groups]
 dev = [
@@ -52,4 +54,18 @@ allow_untyped_decorators = true
 mypy_path = [
   "packages/opentelemetry-instrumentation-amgi-sqs-event-source-mapping/src",
   "packages/opentelemetry-instrumentation-asyncfast/src",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
+version_files = [
+  "packages/*/pyproject.toml:version|opentelemetry-instrumentation",
+]
+pre_bump_hooks = [
+  "uv sync --all-packages",
+  "uv run mdformat CHANGELOG.md",
 ]
