@@ -16,6 +16,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+  "commitizen>=4.13.9",
   "coverage>=7.13.4",
   "mypy>=1.19.1",
   "pre-commit-uv>=4.2.1",
