@@ -62,6 +62,7 @@ tag_format = "$version"
 version_provider = "uv"
 update_changelog_on_bump = true
 major_version_zero = true
+allow_no_commit = true
 version_files = [
   "packages/*/pyproject.toml:version|opentelemetry-instrumentation",
 ]
