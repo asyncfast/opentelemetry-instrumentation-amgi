@@ -1,0 +1,60 @@
+name: Tests
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+permissions:
+  contents: read
+  id-token: write
+env:
+  FORCE_COLOR: 1
+jobs:
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+      - name: Cache pre-commit
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ hashFiles('.pre-commit-config.yaml') }}
+      - name: Check commit messages (Commitizen)
+        if: github.event_name == 'pull_request'
+        run: |
+          range="${{ github.event.pull_request.base.sha }}..HEAD"
+          uv run cz check --rev-range "${range}"
+      - name: Run pre-commit
+        run: uv run pre-commit run --all-files
+  tests:
+    name: Run Tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: pre-commit
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: macos-latest
+          - os: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+      - name: Run tests
+        run: uv run tox
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          use_oidc: true
