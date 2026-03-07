@@ -19,7 +19,7 @@ from amgi_types import Scope
 from asyncfast import AsyncFast
 from asyncfast.middleware.errors import ServerErrorMiddleware
 from opentelemetry import trace
-from opentelemetry.instrumentation.instrumentor import BaseInstrumentor
+from opentelemetry.instrumentation.instrumentor import BaseInstrumentor  # type: ignore[attr-defined]
 from opentelemetry.propagate import extract
 from opentelemetry.propagate import inject
 from opentelemetry.propagators.textmap import Getter
