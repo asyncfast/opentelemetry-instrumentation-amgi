@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from collections.abc import Callable
 from collections.abc import Collection
 from collections.abc import Sequence
@@ -16,6 +17,7 @@ from amgi_types import AMGISendEvent
 from amgi_types import MessageSendEvent
 from amgi_types import Scope
 from asyncfast import AsyncFast
+from asyncfast.middleware.errors import ServerErrorMiddleware
 from opentelemetry import trace
 from opentelemetry.instrumentation.instrumentor import BaseInstrumentor
 from opentelemetry.propagate import extract
@@ -33,6 +35,9 @@ try:
     package_version: str | None = version("opentelemetry-instrumentation-asyncfast")
 except PackageNotFoundError:
     package_version = None
+
+
+logger = logging.getLogger("opentelemetry-instrumentation-asyncfast.error")
 
 
 original_build_middleware_stack: Callable[[AsyncFast], AMGIApplication] | None = None
@@ -99,22 +104,7 @@ class OpenTelemetryMiddleware:
         self.app = app
         self.tracer = tracer
 
-    async def traced_send(
-        self, send: AMGISendCallable, span: Span, message: AMGISendEvent
-    ) -> None:
-
-        if message["type"] == "message.ack":
-            span.add_event("message.ack")
-            await send(message)
-            return
-
-        if message["type"] == "message.nack":
-            nack_message = message.get("message", "")
-            span.add_event("message.nack", {"error.message": nack_message})
-            span.set_status(Status(StatusCode.ERROR))
-            await send(message)
-            return
-
+    async def traced_send(self, send: AMGISendCallable, message: AMGISendEvent) -> None:
         if message["type"] != "message.send":
             await send(message)
             return
@@ -186,17 +176,12 @@ class OpenTelemetryMiddleware:
             envelope_size = headers_envelope_size(headers) + (body_size or 0)
             set_if(span, "messaging.message.envelope.size", envelope_size)
 
-            try:
-                await self.app(scope, receive, partial(self.traced_send, send, span))
-            except Exception as e:
-                span.record_exception(e)
-                span.set_status(Status(StatusCode.ERROR))
-                raise
+            await self.app(scope, receive, partial(self.traced_send, send))
 
 
 class AsyncFastInstrumentor(BaseInstrumentor):
     def instrumentation_dependencies(self) -> Collection[str]:
-        return ["asyncfast>=0.36.0"]
+        return ["asyncfast>=0.38.0"]
 
     def _instrument(self, **kwargs: Any) -> None:
         global original_build_middleware_stack
@@ -213,11 +198,20 @@ class AsyncFastInstrumentor(BaseInstrumentor):
         original_build_middleware_stack = AsyncFast.build_middleware_stack
 
         def build_middleware_stack(self: AsyncFast) -> AMGIApplication:
-            app = original_build_middleware_stack(self)
-            return OpenTelemetryMiddleware(
-                app,
+            internal_app = original_build_middleware_stack(self)
+            if not isinstance(internal_app, ServerErrorMiddleware):
+                logger.error(
+                    "Skipping AsyncFast instrumentation due to unexpected middleware stack: expected %s, got %s",
+                    ServerErrorMiddleware.__name__,
+                    type(internal_app),
+                )
+                return internal_app
+
+            open_telemetry_middleware = OpenTelemetryMiddleware(
+                internal_app.app,
                 tracer,
             )
+            return ServerErrorMiddleware(open_telemetry_middleware)
 
         cast(Any, AsyncFast).build_middleware_stack = build_middleware_stack
 
