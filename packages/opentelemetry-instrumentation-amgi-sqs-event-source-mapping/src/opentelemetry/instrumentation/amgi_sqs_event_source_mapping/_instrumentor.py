@@ -12,7 +12,7 @@ import opentelemetry.metrics as metrics
 import opentelemetry.trace as trace
 from amgi_sqs_event_source_mapping import SqsEventSourceMappingHandler
 from amgi_types import AMGIApplication
-from opentelemetry.instrumentation.instrumentor import BaseInstrumentor
+from opentelemetry.instrumentation.instrumentor import BaseInstrumentor  # type: ignore[attr-defined]
 
 logs: ModuleType | None
 try:
