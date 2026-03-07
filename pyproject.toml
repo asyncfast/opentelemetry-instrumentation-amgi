@@ -28,6 +28,7 @@ dev = [
 
 [tool.uv]
 workspace.members = [
+  "example",
   "packages/*",
 ]
 
