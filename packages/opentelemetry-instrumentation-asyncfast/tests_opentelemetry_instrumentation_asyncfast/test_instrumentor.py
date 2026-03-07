@@ -86,6 +86,52 @@ async def test_asyncfast_instrumentation_consume(
     }
 
 
+async def test_asyncfast_instrumentation_consume_exception(
+    in_memory_span_exporter: InMemorySpanExporter,
+) -> None:
+    app = AsyncFast()
+
+    class MessagePayload(BaseModel):
+        id: int
+
+    mock_send = AsyncMock()
+
+    @app.channel("topic")
+    async def topic_handler(payload: MessagePayload) -> None:
+        raise Exception("Exception in handle")
+
+    message_scope: MessageScope = {
+        "type": "message",
+        "amgi": {"version": "2.0", "spec_version": "2.0"},
+        "address": "topic",
+        "headers": [(b"Id", b"10")],
+        "payload": b'{"id":1}',
+    }
+
+    await app(message_scope, AsyncMock(), mock_send)
+
+    spans = in_memory_span_exporter.get_finished_spans()
+    assert len(spans) == 1
+    span = spans[0]
+
+    assert span.name == "consume topic"
+    assert span.kind == SpanKind.CONSUMER
+    assert span.status.status_code == StatusCode.ERROR
+    assert span.attributes == {
+        "messaging.destination.name": "topic",
+        "messaging.message.body.size": 8,
+        "messaging.message.envelope.size": 12,
+        "messaging.operation.name": "consume",
+        "messaging.operation.type": "process",
+    }
+
+    mock_send.assert_has_awaits(
+        [
+            call({"type": "message.nack", "message": "Exception in handle"}),
+        ]
+    )
+
+
 async def test_asyncfast_instrumentation_consume_parent(
     in_memory_span_exporter: InMemorySpanExporter, tracer_provider: TracerProvider
 ) -> None:

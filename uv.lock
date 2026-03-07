@@ -1,6 +1,11 @@
 version = 1
 revision = 3
 requires-python = ">=3.10"
+resolution-markers = [
+    "python_full_version >= '3.14'",
+    "python_full_version == '3.13.*'",
+    "python_full_version < '3.13'",
+]
 
 [manifest]
 members = [
@@ -11,41 +16,41 @@ members = [
 
 [[package]]
 name = "amgi-common"
-version = "0.37.0"
+version = "0.38.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "amgi-types" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2b/e0/f5ae21863cae56d0232cea1988df0e523c9bc65600f14a08a5a7a18ffd5e/amgi_common-0.37.0.tar.gz", hash = "sha256:d86913262565b032449bb9cdef7a346d0c633f2b63090b3b3bcf46605a9481fd", size = 5236, upload-time = "2026-02-25T22:34:26.372Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/05/33c60721adfad23760d5d62039c9596f6db2380ead1dc4d3e66b0cff13ba/amgi_common-0.38.0.tar.gz", hash = "sha256:f3763deb780538adfaff266b602cdc73060883ed7fe02202e29cb4519bb4c41f", size = 5230, upload-time = "2026-03-05T12:44:26Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/43/e4a4dce70d51096a9efe7ad8dd889ded408519c57fa3f5c2fae023bd0653/amgi_common-0.37.0-py3-none-any.whl", hash = "sha256:3f12b2855e0551af1b819f33354b80dccab1ad674df277744049f4e3d07fb59b", size = 6282, upload-time = "2026-02-25T22:34:23.392Z" },
+    { url = "https://files.pythonhosted.org/packages/80/d4/24cba0d26a98ed88516dec014dacf94a6817baf766aacfa8ad7da3b17315/amgi_common-0.38.0-py3-none-any.whl", hash = "sha256:c0bf131aac3b1ce6e96d12a38c0151eb7e31f46552e150f1de49f6feb09cfe8a", size = 6282, upload-time = "2026-03-05T12:44:32.128Z" },
 ]
 
 [[package]]
 name = "amgi-sqs-event-source-mapping"
-version = "0.37.0"
+version = "0.38.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "amgi-common" },
     { name = "amgi-types" },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7e/6a/d2ac6f8b44c144e630ba3a7547c982f1d6e944f6c35f6f93caab396dd21b/amgi_sqs_event_source_mapping-0.37.0.tar.gz", hash = "sha256:ddba9cc90ff1aa32d65d29952fac7354161706f519988f5e0fc654652c8070de", size = 5859, upload-time = "2026-02-25T22:34:24.189Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/98/47bf7138726da6c519b7397d36a5f4326a0f75426e1bb5ca1ea83f744fe8/amgi_sqs_event_source_mapping-0.38.0.tar.gz", hash = "sha256:910515d0e1b8813d1ebae71628de11b27997df15577374f779d06bb2441094a2", size = 5864, upload-time = "2026-03-05T12:44:38.812Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a7/03/d589cfae25b87702dafb28b04e62d48a87ab0a2eba2e8b35a4eae60ff281/amgi_sqs_event_source_mapping-0.37.0-py3-none-any.whl", hash = "sha256:fac38b47be120644707060328ced7a4ecc5301caadc6fac78303f0cc4175fd2f", size = 7243, upload-time = "2026-02-25T22:34:17.027Z" },
+    { url = "https://files.pythonhosted.org/packages/53/c3/4c1485936741ebbbf4abb03a00c22ff405744ebc5193868daa893448daba/amgi_sqs_event_source_mapping-0.38.0-py3-none-any.whl", hash = "sha256:11a1ec609a1eae98ce5620fd39d3d3e83e86e5616d37c9f6155ee84da3e6661d", size = 7244, upload-time = "2026-03-05T12:44:23.325Z" },
 ]
 
 [[package]]
 name = "amgi-types"
-version = "0.37.0"
+version = "0.38.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cd/33/dc5a04a448a26e3b1da4b04d69105e675f67a36dde0d3b306509b33d443c/amgi_types-0.37.0.tar.gz", hash = "sha256:6078e78e5f1d25a5beff4d557403ac3a2a6c6fc9afd24b2e5383609faf892667", size = 2929, upload-time = "2026-02-25T22:34:17.759Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7f/ff/dd7f33581477674e82fda989faaec5475f22190ac32916ff88323f281308/amgi_types-0.38.0.tar.gz", hash = "sha256:802f384d84bcc6f866481c8b004ff77450717989d38bfd0980cd7c59e95abae3", size = 2928, upload-time = "2026-03-05T12:44:28.565Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/6d/78d4c848d91c44ac1022346d3f784185bea5ee70322fa38efee4e0766256/amgi_types-0.37.0-py3-none-any.whl", hash = "sha256:cdcd5683f1385caac42d8c9b9d4e5267c506b435f140dc39347ff75a84cf72c9", size = 4032, upload-time = "2026-02-25T22:34:13.264Z" },
+    { url = "https://files.pythonhosted.org/packages/65/53/3d25b82d2f37dcd1d40567dd1ef7c47760baf485fe8b8aedfc387fc71a9f/amgi_types-0.38.0-py3-none-any.whl", hash = "sha256:fbbd223dff5bb50b5d23db7209400ff12908f676bbc94bc74bd6879eec5b5915", size = 4032, upload-time = "2026-03-05T12:44:31.419Z" },
 ]
 
 [[package]]
@@ -68,15 +73,15 @@ wheels = [
 
 [[package]]
 name = "asyncfast"
-version = "0.37.0"
+version = "0.38.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "amgi-types" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/49/26/4eb1825c1835eee39ce5f8378993654e916e498992e2239c46cf932727b9/asyncfast-0.37.0.tar.gz", hash = "sha256:6f3a0f70f268eecd94ab751ac6df413afb844696361b7ea6aee9440c2b39e047", size = 10929, upload-time = "2026-02-25T22:34:18.255Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2a/4e/ad8d38d55958563f67c08518dc9ed585a2d774639232328d10e20eea7705/asyncfast-0.38.0.tar.gz", hash = "sha256:4ba30ee133fbe959e6a3c1f6a968b520e0e1922a2c238da8fb054e948e67c3a8", size = 11098, upload-time = "2026-03-05T12:44:26.698Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/0b/ea68db6f115f385bc750c2570492a2aac14f73204cb971fa1bfcd7ba52a6/asyncfast-0.37.0-py3-none-any.whl", hash = "sha256:7d78ad22141ee9297267ae923891a646277a5c4f0dae2e56112eec5146ce9cc8", size = 14637, upload-time = "2026-02-25T22:34:19.913Z" },
+    { url = "https://files.pythonhosted.org/packages/dd/b9/bfb7f0a058bdd2e4a324ec98b1281e942edd5fd9c67f1bf053169a5fb4f2/asyncfast-0.38.0-py3-none-any.whl", hash = "sha256:3b2b9d5c434e4d4c45fc324a4c6ded98e425689ea851c21d6a3be1387092855d", size = 15354, upload-time = "2026-03-05T12:44:24.79Z" },
 ]
 
 [[package]]
@@ -865,7 +870,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "amgi-types", specifier = ">=0.36.0" },
-    { name = "asyncfast", specifier = ">=0.36.0" },
+    { name = "asyncfast", specifier = ">=0.38.0" },
     { name = "opentelemetry-api", specifier = "~=1.12" },
     { name = "opentelemetry-instrumentation", specifier = "==0.60b1" },
     { name = "opentelemetry-sdk", specifier = "~=1.12" },
